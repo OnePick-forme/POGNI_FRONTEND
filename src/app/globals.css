@@ -16,6 +16,21 @@ body {
   overflow-x: hidden;
 }
 
+@font-face {
+  font-family: "Jal_Onuel";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard.woff")
+    format("woff");
+  font-style: normal;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
