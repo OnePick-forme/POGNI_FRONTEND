@@ -1,7 +1,7 @@
 "use client";
 
 import * as S from "./style.css";
-import Header from "@/app/components/header";
+import Header from "@/app/(admin)/components/header";
 import Upload from "@/app/(admin)/components/upload";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -1,7 +1,7 @@
 "use client";
 
 import Postcode from "@actbase/react-daum-postcode";
-import Header from "@/app/components/header";
+import Header from "@/app/(admin)/components/header";
 import * as S from "./style.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -33,7 +33,7 @@ const Map = () => {
       <div className={S.MapLayout}>
         {isPostcodeOpen && (
           <Postcode
-            style={{ flex: 1, width: "100%", height:"100vh", zIndex: 999 }}
+            style={{ flex: 1, width: "100%", height: "100vh", zIndex: 999 }}
             jsOptions={{ animation: true }}
             onSelected={(data: Address) => getAddressData(data)}
             onError={(error: unknown) => {
