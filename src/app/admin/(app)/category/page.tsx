@@ -30,7 +30,6 @@ const Category = () => {
   };
 
   const handleSubmit = () => {
-    // 비어 있거나 초과된 경우 에러 처리
     const newErrors = {
       name: name.length === 0 || name.length > 12,
       content: content.length === 0 || content.length > 30,

@@ -1,7 +1,12 @@
 import Header from "@/app/(user)/components/header";
 import * as S from "./style.css";
+<<<<<<< HEAD:src/app/user/(app)/ViewBoard/page.tsx
+// import Link from "next/link";
+import Footer from "@/app/user/components/footer";
+=======
 import Link from "next/link";
 import Footer from "@/app/(user)/components/footer";
+>>>>>>> 5ced47194881e04af90a3fed6a022e41bf3de656:src/app/(user)/(app)/ViewBoard/page.tsx
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
 
