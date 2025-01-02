@@ -22,13 +22,15 @@ export const DetailTitle=style({
 
 export const DetailTitleText=style({
     fontSize:"28px",
-    fontFamily: "Pretendard-Medium",
+    fontFamily: "Pretendard",
+    fontWeight:"400",
     color:theme.gray[900]
 })
 
 export const DetailTitleDate=style({
     fontSize:"24px",
-    fontFamily: "Pretendard-Regular",
+    fontFamily: "Pretendard",
+    fontWeight:"400",
     color:theme.gray[500]
 })
 
@@ -45,7 +47,8 @@ export const DetailTexts=style({
     flexWrap: "wrap",
     whiteSpace:"pre-wrap",
     fontSize:"22px",
-    fontFamily: "Pretendard-Medium",
+    fontFamily: "Pretendard",
+    fontWeight:"500",
     padding:"0 0 42px 0",
 })
 

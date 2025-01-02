@@ -26,13 +26,15 @@ export const BoardTitleBottom = style({
 export const BoardTitleText = style({
   display:"flex",
   fontSize:"25px",
-  fontFamily: "Pretendard-Medium",
+  fontFamily: "Pretendard",
+  fontWeight:"500",
   color:theme.gray[900],
 });
 export const BoardTitleNumber=style({
   padding:"0 0 0 6px",
   color:theme.green,
-  fontFamily:"Pretendard-SemiBold",
+  fontFamily:"Pretendard",
+  fontWeight:"600"
 })
 export const BoardTitleInput = style({
   width:"184px",
@@ -40,7 +42,8 @@ export const BoardTitleInput = style({
   border:"none",
   outline:"none",
   fontSize:"20px",
-  fontFamily:"Pretendard-Medium",
+  fontFamily:"Pretendard",
+  fontWeight:"500",
   color:theme.gray[900],
   "::placeholder":{
     color:theme.gray[500],
@@ -78,7 +81,8 @@ export const BoardBoxNumbers=style({
   alignItems:"center",
   fontSize:"24px",
   gap:"20px",
-  fontFamily:"Pretendard-SemiBold",
+  fontFamily:"Pretendard",
+  fontWeight:"500",
   color:theme.gray[500],
 })
 
