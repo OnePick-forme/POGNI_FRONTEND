@@ -1,9 +1,5 @@
-import Header from "@/app/user/components/header";
 import * as S from "./style.css";
 import Link from "next/link";
-import Footer from "@/app/user/components/footer";
-import Image from "next/image";
-
 // Impontant가 1이면 고정 2이면 중요
 
 const ImpontantBox = ({Important}:{Important:number}) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import Postcode from "@actbase/react-daum-postcode";
-import Header from "@/app/(admin)/components/header";
+import Header from "@/app/admin/components/header";
 import * as S from "./style.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
