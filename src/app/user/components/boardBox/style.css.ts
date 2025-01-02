@@ -24,12 +24,14 @@ export const BoardBoxTexts=style({
 
 export const BoardBoxTitle = style({
     fontSize:"22px",
-    fontFamily: "Pretendard-Medium",
+    fontFamily: "Pretendard",
+    fontWeight:"500",
     color:theme.gray[900],
 })
 
 export const BoardBoxDate = style({
     fontSize:"20px",
-    fontFamily: "Pretendard-Regular",
+    fontFamily: "Pretendard",
+    fontWeight:"400",
     color:theme.gray[500],
 })
