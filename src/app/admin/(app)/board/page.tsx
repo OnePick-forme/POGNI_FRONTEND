@@ -1,9 +1,9 @@
-import Header from "@/app/user/components/header";
 import * as S from "./style.css";
 // import Link from "next/link";
-import Footer from "@/app/user/components/footer";
+import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
-import BoardBox from "@/app/user/components/boardBox";
+import BoardBox from "@/app/(user)/components/boardBox";
+import Header from "@/app/admin/components/header";
 
 const Board = () => {
   const {
