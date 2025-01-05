@@ -1,5 +1,5 @@
 import * as S from "./style.css";
-import Link from "next/link";
+// import Link from "next/link";
 
 const CategoryBox = ({Title,Text}:{Title:string,Text:string}) => {
   return (

@@ -1,15 +1,15 @@
 "use client";
 
-import Header from "@/app/(user)/(app)/main/Header";
+import Header from "@/app/(user)/(app)/main/header";
 import * as S from "./style.css";
-import Link from "next/link";
 import Footer from "@/app/(user)/components/footer";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import MainImage from "../../components/MainImage";
-import CategoryBox from "../../components/CategoryBox";
-import OverView from "@/app/(user)/(app)/main/OverView";
-import EggFony from "./EggFony";
+import MainImage from "@/app/(user)/components//mainImage";
+import CategoryBox from "@/app/(user)/components/categoryBox";
+import OverView from "@/app/(user)/(app)/main/overView";
+import Memory from "@/app/(user)/(app)/main/memory";
+import Load from "@/app/(user)/(app)/main/load";
+import News from "@/app/(user)/(app)/main/news";
 
 const Main: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,7 +44,9 @@ const Main: React.FC = () => {
         ))}
       </div>
       <OverView />
-      <EggFony />
+      <Memory />
+      <News />
+      <Load />
       <Footer />
     </>
   );

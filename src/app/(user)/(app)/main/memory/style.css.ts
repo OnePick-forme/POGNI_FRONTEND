@@ -3,7 +3,7 @@ import theme from "@/ui/style/theme.css";
 
 export const EggFonyTextLayout=style({
     width:"100%",
-    padding:"10vw 10% 0 10%",
+    padding:"10% 10% 0 10%",
 })
 
 export const EggFonyText=style({
