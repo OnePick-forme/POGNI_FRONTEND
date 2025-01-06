@@ -4,7 +4,9 @@ import theme from "@/ui/style/theme.css";
 export const NoticeLayout =style({
     width:"100%",
     padding:"0 10%",
-
+    minHeight:"100vh",
+    display:"flex",
+    flexDirection:"column"
 })
 
 export const NoticeTitle=style({
