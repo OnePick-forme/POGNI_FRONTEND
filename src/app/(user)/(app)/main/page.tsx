@@ -1,12 +1,12 @@
 "use client";
 
-import Header from "@/app/(user)/(app)/main/header";
+import Header from "@/app/(user)/(app)/main/Header";
 import * as S from "./style.css";
 import Footer from "@/app/(user)/components/footer";
 import { useEffect, useRef, useState } from "react";
-import MainImage from "@/app/(user)/components//mainImage";
-import CategoryBox from "@/app/(user)/components/categoryBox";
-import OverView from "@/app/(user)/(app)/main/overView";
+import MainImage from "@/app/(user)/components/MainImage";
+import CategoryBox from "@/app/(user)/components/CategoryBox";
+import OverView from "@/app/(user)/(app)/main/OverView";
 import Memory from "@/app/(user)/(app)/main/memory";
 import Load from "@/app/(user)/(app)/main/load";
 import News from "@/app/(user)/(app)/main/news";
