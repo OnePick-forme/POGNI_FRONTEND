@@ -13,13 +13,13 @@ const Coming = () => {
         address: '',
         information: '',
         contact: '',
-        opening_hour: '',
+        openingHour: '',
         road: ''
       });
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://10.150.150.252:8080/location', {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/location`, {
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -38,7 +38,7 @@ const Coming = () => {
     MainAddress:data.address,
     OtherText:data.information,
     TellNumber:data.contact,
-    Time:data.opening_hour,
+    Time:data.openingHour,
     ComingText:data.road
   }
 
