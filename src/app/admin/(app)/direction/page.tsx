@@ -11,7 +11,7 @@ const Direction = () => {
     address: '',
     information: '',
     contact: '',
-    opening_hour: '',
+    openingHour: '',
     road: '',
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ const Direction = () => {
   const addData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post(`http://10.150.150.252:8080/location/save`, formData,{
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/location/save`, formData,{
         headers: {
           'Content-Type': 'application/json',
         },
@@ -80,7 +80,7 @@ const Direction = () => {
         </div>
         <div className={S.Box}>
           <div className={S.Title}>운영시간</div>
-          <input placeholder="운영시간을 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, opening_hour: e.target.value })} />
+          <input placeholder="운영시간을 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, openingHour: e.target.value })} />
           <div className={S.Lines}></div>
         </div>
         <div className={S.Box}>
