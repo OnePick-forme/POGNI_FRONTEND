@@ -1,16 +1,45 @@
+"use client";
 import Header from "@/app/(user)/components/header";
 import * as S from "./style.css";
 import Link from "next/link";
 import Footer from "@/app/(user)/components/footer";
 import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 const Coming = () => {
+    const [data, setData] = useState({
+        address: '',
+        information: '',
+        contact: '',
+        opening_hour: '',
+        road: ''
+      });
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get('http://10.150.150.252:8080/location', {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            setData(response.data);
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
   const {MainAddress,OtherText,TellNumber,ComingText,Time}={
-    MainAddress:"부산 동래구 연안로59번길 99 한국빌딩 1층",
-    OtherText:"주차 가능",
-    TellNumber:"051-507-6961, 051-507-6963",
-    Time:"월 화 목 금 - 오전 10시~오후 05시",
-    ComingText:"부산시 경전철 안락역에서 하차, 강변뜨라채 105동옆 안락떡방앗간 골목30미터. 버스는 동래-해운대 길 안락한전 하차"
+    MainAddress:data.address,
+    OtherText:data.information,
+    TellNumber:data.contact,
+    Time:data.opening_hour,
+    ComingText:data.road
   }
 
   return (
@@ -35,7 +64,7 @@ const Coming = () => {
                     </div>
                     <div className={S.ComingLogoText}>
                         <Image alt="TellIcon" src="/Timer.svg" width={24} height={24}></Image>
-                        {ComingText}
+                        {Time}
                     </div>
                     <div className={S.ComingLogoText}>
                         <Image alt="TellIcon" src="/Tell.svg" width={24} height={24}></Image>
