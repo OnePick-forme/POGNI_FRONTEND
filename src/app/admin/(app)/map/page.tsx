@@ -23,7 +23,7 @@ const Map = () => {
     setIsPostcodeOpen(false);
 
     router.push(
-      `/direction?selectedAddress=${encodeURIComponent(selectedAddress)}`
+      `/admin/direction?selectedAddress=${encodeURIComponent(selectedAddress)}`
     );
   };
 

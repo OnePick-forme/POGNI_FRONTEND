@@ -1,24 +1,47 @@
 "use client";
-
 import * as S from "./style.css";
 import Header from "@/app/admin/components/header";
 import Upload from "@/app/admin/components/upload";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const Direction = () => {
+  const [formData, setFormData] = useState({
+    address: '',
+    information: '',
+    contact: '',
+    opening_hour: '',
+    road: '',
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [address, setAddress] = useState("");
+
+  const addData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`http://10.150.150.252:8080/location/save`, formData,{
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error); 
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Fetch the selected address from query params
     const selectedAddress = searchParams.get("selectedAddress") || "";
-    setAddress(selectedAddress);
+    setFormData((prev) => ({ ...prev, address: selectedAddress }));
   }, [searchParams]);
 
   const handleSearchClick = () => {
-    router.push("/map");
+    router.push("/admin/map");
   };
 
   return (
@@ -34,8 +57,8 @@ const Direction = () => {
               <input
                 placeholder="주소를 찾기 위해 검색해주세요."
                 className={S.AddressInput}
-                value={address}
-                readOnly
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
               />
               <div className={S.AddressLine}></div>
             </div>
@@ -44,31 +67,29 @@ const Direction = () => {
             </button>
           </div>
         </div>
+        {/* 나머지 입력 필드들 */}
         <div className={S.Box}>
           <div className={S.Title}>추가 정보</div>
-          <input placeholder="추가 정보를 입력해주세요." className={S.input} />
+          <input placeholder="추가 정보를 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, information: e.target.value })} />
           <div className={S.Lines}></div>
         </div>
         <div className={S.Box}>
           <div className={S.Title}>연락처</div>
-          <input placeholder="연락처를 입력해주세요." className={S.input} />
+          <input placeholder="연락처를 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, contact: e.target.value })} />
           <div className={S.Lines}></div>
         </div>
         <div className={S.Box}>
           <div className={S.Title}>운영시간</div>
-          <input placeholder="운영시간을 입력해주세요." className={S.input} />
+          <input placeholder="운영시간을 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, opening_hour: e.target.value })} />
           <div className={S.Lines}></div>
         </div>
         <div className={S.Box}>
           <div className={S.Title}>오시는 길</div>
-          <input
-            placeholder="간단한 설명을 입력해주세요."
-            className={S.input}
-          />
+          <input placeholder="간단한 설명을 입력해주세요." className={S.input} onChange={(e) => setFormData({ ...formData, road: e.target.value })} />
           <div className={S.Lines}></div>
         </div>
       </div>
-      <Upload onClick={()=>{}}/>
+      <Upload onClick={addData} />
     </>
   );
 };
