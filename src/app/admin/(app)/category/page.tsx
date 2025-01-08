@@ -3,7 +3,7 @@
 import * as S from "./style.css";
 import { useState } from "react";
 import Header from "@/app/admin/components/header";
-import Upload from "@/app/admin/components/upload";
+import Upload from "@/app/admin/components/boardUpload";
 
 const Category = () => {
   const [inputs, setInputs] = useState({

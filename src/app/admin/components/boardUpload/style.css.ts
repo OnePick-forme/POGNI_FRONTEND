@@ -12,6 +12,7 @@ export const UploadLayout = style({
   boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.05)",
   borderBottom: `1px solid ${theme.gray[300]}`,
   zIndex: 200,
+  backgroundColor: theme.white,
 });
 
 export const UploadBack = style({
