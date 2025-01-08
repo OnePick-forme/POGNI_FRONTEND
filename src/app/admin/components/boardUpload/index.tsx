@@ -5,7 +5,7 @@ const Upload = ({ onClick }: { onClick: () => void }) => {
   // const Upload = () => {
   return (
     <div className={S.UploadLayout}>
-      <Link href={"/admin/board"} className={S.UploadBack}>
+      <Link href={"/admin/main"} className={S.UploadBack}>
         나가기
       </Link>
       <div className={S.UploadButton} onClick={onClick}>

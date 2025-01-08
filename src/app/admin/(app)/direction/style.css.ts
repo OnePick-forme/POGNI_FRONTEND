@@ -50,17 +50,21 @@ export const AddressLine = style({
 
 export const AddressSearch = style({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "row", // 입력 필드와 버튼 나란히 배치
+  alignItems: "center", // 수직 정렬
+  gap: "16px", // 간격 유지
+  width: "auto",
 });
 
 export const AddressInfo = style({
-  width: "25%",
+  width: "350px",
   display: "flex",
   flexDirection: "column",
 });
 
 export const AddressButton = style({
   display: "flex",
+  position: "sticky",
   padding: "10px 19px 9px 20px",
   justifyContent: "center",
   alignItems: "center",
