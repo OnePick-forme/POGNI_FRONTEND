@@ -1,5 +1,4 @@
 "use client";
-
 import Header from "@/app/admin/(app)/main/header";
 import * as S from "./style.css";
 import Footer from "@/app/(user)/components/footer";
@@ -60,7 +59,7 @@ const Main: React.FC = () => {
       </div>
       <div className={S.CategoryLayout}>
         {CategoryData.map((_, index) => (
-          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} key={index} />
+          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} key={index} index={index+1}/>
         ))}
         <Plusbox />
       </div>

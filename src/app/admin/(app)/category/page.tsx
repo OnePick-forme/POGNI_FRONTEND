@@ -49,7 +49,7 @@ const Category = () => {
 
     // 성공 처리 로직
     addData();
-    console.log("성공적으로 생성되었습니다!");
+    
   };
 
   const addData = async () => {
@@ -64,6 +64,8 @@ const Category = () => {
         }
       );
       console.log(response.data);
+      console.log("성공적으로 생성되었습니다!");
+      window.location.href = `/admin/main`;
     } catch (error) {
       console.error(error);
     }
