@@ -4,17 +4,42 @@ import Header from "@/app/(user)/(app)/main/Header";
 import * as S from "./style.css";
 import Footer from "@/app/(user)/components/footer";
 import { useEffect, useRef, useState } from "react";
-import MainImage from "@/app/(user)/components/MainImage";
-import CategoryBox from "@/app/(user)/components/CategoryBox";
-import OverView from "@/app/(user)/(app)/main/OverView";
+import MainImage from "@/app/(user)/components/mainImage";
+import CategoryBox from "@/app/(user)/components/categoryBox";
+import OverView from "@/app/(user)/(app)/main/overView";
 import Memory from "@/app/(user)/(app)/main/memory";
 import Load from "@/app/(user)/(app)/main/road";
 import News from "@/app/(user)/(app)/main/news";
+import axios from "axios";
 
 const Main: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const mainImageRef = useRef<HTMLDivElement | null>(null);
 
+  const [CategoryData, setCategoryData] = useState([{
+    name: "",
+    content: "",
+  }]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/list`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setCategoryData(response.data);
+        console.log("불러온 데이터:", response.data);
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
   useEffect(() => {
     const mainImageHeight = mainImageRef.current?.clientHeight ?? 0;
     const handleScroll = () => {
@@ -25,13 +50,6 @@ const Main: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const { CategoryText, CategoryTitle } = {
-    CategoryText: "지구도 살리고 여성건강도 살리는 경제적인 면패드",
-    CategoryTitle: "포근이슬",
-  };
-
-  const CategoryArray = Array.from({ length: 5 });
-
   return (
     <>
       <Header hasBackground={isScrolled} />
@@ -39,8 +57,8 @@ const Main: React.FC = () => {
         <MainImage />
       </div>
       <div className={S.CategoryLayout}>
-        {CategoryArray.map((_, index) => (
-          <CategoryBox Text={CategoryText} Title={CategoryTitle} key={index} />
+        {CategoryData.map((_, index) => (
+          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} key={index} />
         ))}
       </div>
       <OverView />
