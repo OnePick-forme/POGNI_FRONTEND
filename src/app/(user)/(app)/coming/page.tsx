@@ -17,8 +17,8 @@ const Coming = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/post/save`,
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/location`,
           {
             headers: {
               "Content-Type": "application/json",
