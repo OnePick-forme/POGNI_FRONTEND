@@ -4,8 +4,14 @@ import * as S from "./style.css";
 import { useState } from "react";
 import Header from "@/app/admin/components/header";
 import Upload from "@/app/admin/components/boardUpload";
+import axios from "axios";
 
 const Category = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    content : "",
+  });
+
   const [inputs, setInputs] = useState({
     name: "",
     content: "",
@@ -42,9 +48,26 @@ const Category = () => {
     }
 
     // 성공 처리 로직
+    addData();
     console.log("성공적으로 생성되었습니다!");
   };
 
+  const addData = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/hashtag/save`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <Header />
@@ -56,7 +79,11 @@ const Category = () => {
             value={name}
             placeholder="카테고리명을 입력해주세요."
             className={S.CategoryInput}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              formData.name = e.target.value;
+            }}
+            
           />
           <div
             className={`${S.CountInput} ${
@@ -84,7 +111,10 @@ const Category = () => {
             value={content}
             placeholder="간단한 설명을 작성해주세요."
             className={S.CategoryInput}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              formData.content = e.target.value;
+            }}
           />
           <div
             className={`${S.CountInput} ${
