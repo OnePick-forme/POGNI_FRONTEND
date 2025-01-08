@@ -1,8 +1,6 @@
 import Header from "@/app/(user)/components/header";
 import * as S from "./style.css";
-import Link from "next/link";
 import Footer from "@/app/(user)/components/footer";
-import Image from "next/image";
 import NoticeBox from "../../components/noticeBox";
 
 const Notice = () => {

@@ -1,5 +1,5 @@
 import * as S from "./style.css";
-// import Link from "next/link";
+import Link from "next/link";
 import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
@@ -29,7 +29,9 @@ const Board = () => {
           <p className={S.Title}>{TitleName}</p>
           <div>수정</div>
           <div>삭제</div>
-          <div className={S.WriteButton}>글작성</div>
+          <Link href={"/admin/write"} className={S.WriteButton}>
+            글작성
+          </Link>
         </div>
 
         <div className={S.BoardTitleBottom}>

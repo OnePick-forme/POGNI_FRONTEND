@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import axios from "axios";
-import BoardUpload from "@/app/admin/components/boardUpload";
+import NoticeUpload from "@/app/admin/components/noticeUpload";
 
 const CustomToolbar = () => (
   <div id="toolbar">
@@ -91,7 +91,7 @@ const Write = () => {
           formats={formats}
         />
       </div>
-      <BoardUpload onClick={handleSubmit} />
+      <NoticeUpload onClick={handleSubmit} />
     </>
   );
 };
