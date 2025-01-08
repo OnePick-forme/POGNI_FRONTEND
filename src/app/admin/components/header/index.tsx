@@ -6,8 +6,8 @@ const Header = () => {
     <div className={S.HeaderLayout}>
       <div className={S.HeaderTitle}>여성과나눔</div>
       <div className={S.HeaderSubTitle}>
-        <Link href="/notice">공지사항</Link>
-        <Link href="/road">오시는길</Link>
+        <Link href="/admin/notice">공지사항</Link>
+        <Link href="/admin/direction">오시는길</Link>
       </div>
     </div>
   );

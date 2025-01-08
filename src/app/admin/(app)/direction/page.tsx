@@ -14,13 +14,11 @@ const Direction = () => {
     openingHour: "",
     road: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const addData = async () => {
-    setIsLoading(true);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/location/save`,
@@ -35,7 +33,7 @@ const Direction = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setIsLoading(false);
+
     }
   };
 

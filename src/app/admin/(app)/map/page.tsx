@@ -4,7 +4,7 @@ import Postcode from "@actbase/react-daum-postcode";
 import Header from "@/app/admin/components/header";
 import * as S from "./style.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Address {
   zonecode: number;
@@ -15,7 +15,11 @@ interface Address {
 
 const Map = () => {
   const router = useRouter();
-  const [isPostcodeOpen, setIsPostcodeOpen] = useState(true);
+  const [isPostcodeOpen, setIsPostcodeOpen] = useState(false); // 초기값을 false로 설정
+
+  useEffect(() => {
+    setIsPostcodeOpen(true);
+  }, []);
 
   const getAddressData = (data: Address) => {
     const selectedAddress =

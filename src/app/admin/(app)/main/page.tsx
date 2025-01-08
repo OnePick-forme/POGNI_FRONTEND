@@ -6,6 +6,7 @@ import Footer from "@/app/(user)/components/footer";
 import { useEffect, useRef, useState } from "react";
 import MainImage from "@/app/admin/components/mainImage";
 import CategoryBox from "@/app/admin/components/categoryBox";
+import Plusbox from "@/app/admin/components/plusbox";
 import OverView from "@/app/admin/(app)/main/overView";
 import Memory from "@/app/(user)/(app)/main/memory";
 import Load from "@/app/(user)/(app)/main/road";
@@ -30,7 +31,7 @@ const Main: React.FC = () => {
     CategoryTitle: "포근이슬",
   };
 
-  const CategoryArray = Array.from({ length: 5 });
+  const CategoryArray = Array.from({ length: 1 });
 
   return (
     <>
@@ -42,6 +43,7 @@ const Main: React.FC = () => {
         {CategoryArray.map((_, index) => (
           <CategoryBox Text={CategoryText} Title={CategoryTitle} key={index} />
         ))}
+        <Plusbox />
       </div>
       <OverView />
       <Memory />
