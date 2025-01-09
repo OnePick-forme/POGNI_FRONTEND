@@ -58,7 +58,7 @@ const Main: React.FC = () => {
       </div>
       <div className={S.CategoryLayout}>
         {CategoryData.map((_, index) => (
-          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} index={index} key={index} />
+          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} index={index+1} key={index} />
         ))}
       </div>
       <OverView />

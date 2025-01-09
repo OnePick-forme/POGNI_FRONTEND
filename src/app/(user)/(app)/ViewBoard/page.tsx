@@ -5,13 +5,40 @@ import Footer from "@/app/(user)/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
 import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const viewBoard = () => {
+  const [CategoryData, setCategoryData] = useState({
+    name: "",
+    content: "",
+  });
+
   const searchParams = useSearchParams();
-  const index = searchParams.get('index');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setCategoryData(response.data);
+        console.log("불러온 데이터:", response.data);
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+      }
+    };
+    const index = searchParams.get('index');
+    fetchData();
+  }, []);
 
   const {TitleName,SearchPlaceholder,BoardBoxImageUrl,BoardBoxTitle,BoardBoxDate}={
-    TitleName:"즐거운 체험활동",
+    TitleName:CategoryData.name,
     SearchPlaceholder:"검색어를 입력해주세요.",
     BoardBoxImageUrl:"/Search.svg",
     BoardBoxTitle:"양말 목재 활동 공예~ 새학기 내 방석은 내가 짠다!",

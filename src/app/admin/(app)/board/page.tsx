@@ -6,11 +6,37 @@ import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
 import Header from "@/app/admin/components/header";
 import { useSearchParams } from 'next/navigation';
+import { useState,useEffect } from "react";
+import axios from "axios";
 
 const Board = () => {
-  const searchParams = useSearchParams();
-  const index = searchParams.get('index');
+  const [CategoryData, setCategoryData] = useState({
+    name: "",
+    content: "",
+  });
 
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setCategoryData(response.data);
+        console.log("불러온 데이터:", response.data);
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+      }
+    };
+    const index = searchParams.get('index');
+    fetchData();
+  }, []);
   const {
     TitleName,
     SearchPlaceholder,
