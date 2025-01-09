@@ -16,10 +16,12 @@ const Main: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const mainImageRef = useRef<HTMLDivElement | null>(null);
 
-  const [CategoryData, setCategoryData] = useState([{
-    name: "",
-    content: "",
-  }]);
+  const [CategoryData, setCategoryData] = useState([
+    {
+      name: "",
+      content: "",
+    },
+  ]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,7 +61,12 @@ const Main: React.FC = () => {
       </div>
       <div className={S.CategoryLayout}>
         {CategoryData.map((_, index) => (
-          <CategoryBox Text={CategoryData[index].content} Title={CategoryData[index].name} key={index} index={index+1}/>
+          <CategoryBox
+            Text={CategoryData[index].content}
+            Title={CategoryData[index].name}
+            key={index}
+            index={index + 1}
+          />
         ))}
         <Plusbox />
       </div>
