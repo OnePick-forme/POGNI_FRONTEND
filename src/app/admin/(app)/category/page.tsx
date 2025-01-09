@@ -2,6 +2,7 @@
 
 import * as S from "./style.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Next.js useRouter import
 import Header from "@/app/admin/components/header";
 import Upload from "@/app/admin/components/boardUpload";
 import axios from "axios";
@@ -9,33 +10,32 @@ import axios from "axios";
 const Category = () => {
   const [formData, setFormData] = useState({
     name: "",
-    content : "",
-  });
-
-  const [inputs, setInputs] = useState({
-    name: "",
     content: "",
   });
+
   const [errors, setErrors] = useState({
     name: false,
     content: false,
   });
 
-  const { name, content } = inputs;
+  const router = useRouter(); // useRouter 사용
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
 
-    // 글자 초과만 실시간으로 검증
+    // 상태 업데이트
+    setFormData({ ...formData, [name]: value });
+
+    // 글자 초과만 실시간 검증
     const maxLength = name === "name" ? 12 : 30;
     setErrors({
       ...errors,
-      [name]: value.length > maxLength, // 초과 여부만 반영
+      [name]: value.length > maxLength,
     });
   };
 
   const handleSubmit = () => {
+    const { name, content } = formData;
     const newErrors = {
       name: name.length === 0 || name.length > 12,
       content: content.length === 0 || content.length > 30,
@@ -43,13 +43,11 @@ const Category = () => {
     setErrors(newErrors);
 
     if (Object.values(newErrors).some((error) => error)) {
-      // 에러가 있으면 반환
       return;
     }
 
     // 성공 처리 로직
     addData();
-    
   };
 
   const addData = async () => {
@@ -63,36 +61,32 @@ const Category = () => {
           },
         }
       );
-      console.log(response.data);
-      console.log("성공적으로 생성되었습니다!");
-      window.location.href = `/admin/main`;
+
+      console.log("응답 데이터:", response.data);
+      router.push("/admin/main"); // 성공 후 이동
     } catch (error) {
-      console.error(error);
+      console.error("API 요청 중 오류:", error);
     }
   };
+
   return (
     <>
       <Header />
       <div className={S.CategoryLayout}>
-        {/* 카테고리 입력 */}
         <div className={S.InputLayout}>
           <input
             name="name"
-            value={name}
+            value={formData.name}
             placeholder="카테고리명을 입력해주세요."
             className={S.CategoryInput}
-            onChange={(e) => {
-              handleChange(e);
-              formData.name = e.target.value;
-            }}
-            
+            onChange={handleChange}
           />
           <div
             className={`${S.CountInput} ${
               errors.name ? S.CountInputError : ""
             }`}
           >
-            {name.length}/12
+            {formData.name.length}/12
           </div>
         </div>
         <div
@@ -100,7 +94,7 @@ const Category = () => {
         ></div>
         {errors.name && (
           <div className={S.ErrorMessage}>
-            {name.length === 0
+            {formData.name.length === 0
               ? "카테고리를 입력해주세요."
               : "글자 수를 초과했습니다."}
           </div>
@@ -110,20 +104,17 @@ const Category = () => {
         <div className={S.InputLayout}>
           <input
             name="content"
-            value={content}
+            value={formData.content}
             placeholder="간단한 설명을 작성해주세요."
             className={S.CategoryInput}
-            onChange={(e) => {
-              handleChange(e);
-              formData.content = e.target.value;
-            }}
+            onChange={handleChange}
           />
           <div
             className={`${S.CountInput} ${
               errors.content ? S.CountInputError : ""
             }`}
           >
-            {content.length}/30
+            {formData.content.length}/30
           </div>
         </div>
         <div
@@ -131,7 +122,7 @@ const Category = () => {
         ></div>
         {errors.content && (
           <div className={S.ErrorMessage}>
-            {content.length === 0
+            {formData.content.length === 0
               ? "설명을 입력해주세요."
               : "글자 수를 초과했습니다."}
           </div>
