@@ -1,10 +1,15 @@
+"use client";
 import Header from "@/app/(user)/components/header";
 import * as S from "./style.css";
 import Footer from "@/app/(user)/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
+import { useSearchParams } from 'next/navigation';
 
 const viewBoard = () => {
+  const searchParams = useSearchParams();
+  const index = searchParams.get('index');
+
   const {TitleName,SearchPlaceholder,BoardBoxImageUrl,BoardBoxTitle,BoardBoxDate}={
     TitleName:"즐거운 체험활동",
     SearchPlaceholder:"검색어를 입력해주세요.",

@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import Header from "@/app/admin/components/header";
 import * as S from "./style.css";
 import React, { useState } from "react";
@@ -7,7 +6,6 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import axios from "axios";
 import BoardUpload from "@/app/admin/components/boardUpload";
-import { useSearchParams } from 'next/navigation';
 
 const CustomToolbar = () => (
   <div id="toolbar">
@@ -23,8 +21,6 @@ const CustomToolbar = () => (
 const Write = () => {
   const [value, setValue] = useState(""); // 게시글 내용
   const [title, setTitle] = useState(""); // 게시글 제목
-  const searchParams = useSearchParams();
-  const index = searchParams.get('index');
 
   const handleSubmit = async () => {
     if (!title || !value) {

@@ -5,7 +5,8 @@ export const DirectionsLayout = style({
   display: "flex",
   width: "100%",
   padding: "0 10%",
-  flexDirection: "column",
+  minHeight:"100vh",
+  flexDirection:"column"
 });
 
 export const DirectionTitle = style({

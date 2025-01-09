@@ -6,6 +6,7 @@ export const CategoryLayout = style({
   width: "70%",
   padding: "0 10%",
   flexDirection: "column",
+  minHeight:"100vh",
 });
 
 export const CategoryInput = style({

@@ -5,6 +5,9 @@ export const WriteLayout = style({
   height: "100vh",
   width: "100%",
   padding: "0 10%",
+  minHeight:"100vh",
+  display:"flex",
+  flexDirection:"column"
 });
 
 export const WriteTitle = style({
