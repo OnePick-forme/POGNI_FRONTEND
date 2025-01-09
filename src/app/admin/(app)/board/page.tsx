@@ -10,9 +10,8 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// Post 타입 정의 (id 추가)
+// Post 타입 정의
 interface Post {
-  id: string; // id 속성 추가
   imageUrl?: string;
   title: string;
   date: string;
@@ -23,14 +22,14 @@ const Board = () => {
     name: "",
     content: "",
   });
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]); // 게시물 데이터의 타입을 정의
 
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const index = searchParams.get("index");
+        const index = searchParams.get("index"); // searchParams에서 index를 가져옵니다.
         if (index) {
           const response = await axios.get(
             `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`, // URL 수정
@@ -51,12 +50,12 @@ const Board = () => {
     fetchData(); // 함수 호출
   }, [searchParams]); // searchParams가 변경될 때마다 fetchData를 호출
 
-  const { name: TitleName } = CategoryData;
+  const {
+    name: TitleName,
 
-  const BoardBoxArray: Post[] =
-    posts.length > 0
-      ? posts
-      : [{ id: "default", title: "기본 제목", date: "2024.12.13" }];
+  } = CategoryData;
+
+  const BoardBoxArray: Post[] = posts.length > 0 ? posts : [{ title: "기본 제목", date: "2024.12.13" }];
 
   return (
     <>
@@ -82,26 +81,27 @@ const Board = () => {
               type="text"
               placeholder="검색어를 입력해주세요."
             />
-            <Image src="/Search.svg" alt="SearchIcon" width={16} height={16} />
+            <Image
+              src="/Search.svg"
+              alt="SearchIcon"
+              width={16}
+              height={16}
+            />
           </div>
         </div>
 
         <div className={S.BoardBoxList}>
           {BoardBoxArray.map((post, index) => (
-            <Link key={index} href={`/post/${post.id}`} passHref>
-              <BoardBox
-                ImageUrl={post.imageUrl || "/Search.svg"} // 게시물의 이미지 URL이 없으면 기본 값 사용
-                Date={post.date || "2024.12.13"} // 게시물의 날짜가 없으면 기본 날짜 사용
-                Title={
-                  post.title ||
-                  "양말 목재 활동 공예~ 새학기 내 방석은 내가 짠다!"
-                } // 제목 기본값
-              />
-            </Link>
+            <BoardBox
+              key={index}
+              ImageUrl={post.imageUrl || "/Search.svg"} // 게시물의 이미지 URL이 없으면 기본 값 사용
+              Date={post.date || "2024.12.13"} // 게시물의 날짜가 없으면 기본 날짜 사용
+              Title={post.title || "양말 목재 활동 공예~ 새학기 내 방석은 내가 짠다!"} // 제목 기본값
+            />
           ))}
         </div>
-
-        {/* <div className={S.BoardBoxSlide}>
+{/* 
+        <div className={S.BoardBoxSlide}>
           <div className={S.BoardBoxNumbers}>
             <div className={S.BoardBoxSelectNumbers}>1</div>
             <div>2</div>
