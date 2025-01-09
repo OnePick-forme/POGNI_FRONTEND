@@ -1,11 +1,16 @@
+"use client";
 import * as S from "./style.css";
 import Link from "next/link";
 import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
 import Header from "@/app/admin/components/header";
+import { useSearchParams } from 'next/navigation';
 
 const Board = () => {
+  const searchParams = useSearchParams();
+  const index = searchParams.get('index');
+
   const {
     TitleName,
     SearchPlaceholder,
