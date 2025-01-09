@@ -33,6 +33,11 @@ const Write = () => {
     formData.append("content", value); // HTML 내용 포함
     formData.append("date", new Date().toISOString().split("T")[0]); // yyyy-mm-dd 형식
 
+    console.log("서버로 보낼 데이터:");
+    for (const [key, val] of formData.entries()) {
+      console.log(`${key}: ${val}`);
+    }
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/hashtag/post/save`,
