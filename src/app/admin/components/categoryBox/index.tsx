@@ -1,17 +1,20 @@
 import * as S from "./style.css";
-// import Link from "next/link";
 
-const CategoryBox = ({Title,Text}:{Title:string,Text:string}) => {
+const CategoryBox = ({ Title, Text, index }: { Title: string; Text: string; index: number }) => {
+  const handleClick = () => {
+    window.location.href = `/admin/write?index=${index}`;
+  };
+
   return (
-    <div className={S.CategoryBox}>
-        <div className={S.CategoryWrap}>
-            <div className={S.CategoryTitle}>
-                {Title}
-            </div>
-            <div className={S.CategoryText}>
-                {Text}
-            </div>
+    <div className={S.CategoryBox} onClick={handleClick} style={{ cursor: "pointer" }}>
+      <div className={S.CategoryWrap}>
+        <div className={S.CategoryTitle}>
+          {Title}
         </div>
+        <div className={S.CategoryText}>
+          {Text}
+        </div>
+      </div>
     </div>
   );
 };
