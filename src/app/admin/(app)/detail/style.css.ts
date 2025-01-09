@@ -4,9 +4,9 @@ import theme from "@/ui/style/theme.css";
 export const DetailLayout = style({
   width: "100%",
   padding: "0 10%",
-  minHeight:"100vh",
-  display:"flex",
-  flexDirection:"column"
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
 });
 
 export const DetailShow = style({
@@ -67,4 +67,24 @@ export const DetailEdit = style({
 
 export const DetailImage = style({
   padding: "0 0 328px 0",
+});
+
+export const DetailFetchedDataPre = style({
+  backgroundColor: "#eee",
+  padding: "10px",
+  borderRadius: "5px",
+  whiteSpace: "pre-wrap", // 텍스트가 길어지면 줄바꿈 처리
+  wordWrap: "break-word",
+});
+
+export const DetailFetchedData = style({
+  padding: "20px",
+  backgroundColor: "#f4f4f4",
+  borderRadius: "8px",
+  marginTop: "20px",
+  fontFamily: "Arial, sans-serif",
+});
+
+export const DetailFetchedDataHeading = style({
+  color: "#333",
 });

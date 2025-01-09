@@ -1,19 +1,28 @@
 "use client";
+
 import * as S from "./style.css";
 import Link from "next/link";
 import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
 import Header from "@/app/admin/components/header";
-import { useSearchParams } from 'next/navigation';
-import { useState,useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import axios from "axios";
+
+// Post 타입 정의
+interface Post {
+  imageUrl?: string;
+  title: string;
+  date: string;
+}
 
 const Board = () => {
   const [CategoryData, setCategoryData] = useState({
     name: "",
     content: "",
   });
+
   const [BoardData, setBoardData] = useState([{
     id: Number,
     title: "",
@@ -21,6 +30,7 @@ const Board = () => {
     date: "",
     img: ""
   }]);
+
   const searchParams = useSearchParams();
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString); // 문자열을 Date 객체로 변환
@@ -33,20 +43,24 @@ const Board = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setCategoryData(response.data);
-        console.log("불러온 데이터:", response.data);
+        const index = searchParams.get("index"); // searchParams에서 index를 가져옵니다.
+        if (index) {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`, // URL 수정
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          setCategoryData(response.data); // CategoryData 업데이트
+          setPosts(response.data.posts || []); // 게시물 데이터를 받아와서 업데이트
+        }
       } catch (err) {
         console.error("데이터 불러오기 실패:", err);
       }
     };
+
     const fetchBoardData = async () => {
       try {
         const response = await axios.get(
@@ -73,6 +87,7 @@ const Board = () => {
     SearchPlaceholder: "검색어를 입력해주세요.",
   };
 
+
   return (
     <>
       <Header />
@@ -81,41 +96,46 @@ const Board = () => {
           <p className={S.Title}>{CategoryData.name}</p>
           <div>수정</div>
           <div>삭제</div>
-          <Link href={"/admin/write"} className={S.WriteButton}>
+          <Link href="/admin/write" className={S.WriteButton}>
             글작성
           </Link>
         </div>
 
         <div className={S.BoardTitleBottom}>
           <div className={S.BoardTitleText}>
+
             전체 <div className={S.BoardTitleNumber}>{BoardData.length}</div>건
+
           </div>
           <div className={S.BoardSearchBox}>
             <input
               name="BoardSearch"
               className={S.BoardTitleInput}
               type="text"
-              placeholder={SearchPlaceholder}
+              placeholder="검색어를 입력해주세요."
             />
             <Image
               src="/Search.svg"
               alt="SearchIcon"
               width={16}
               height={16}
-            ></Image>
+            />
           </div>
         </div>
 
         <div className={S.BoardBoxList}>
+
           {BoardData.map((data, index) => (
             <BoardBox
               key={index}
               ImageUrl={data.img || "/gray.png"} // img가 없으면 기본 이미지 사용
               Date={formatDate(data.date)}
               Title={data.title}
+
             />
           ))}
         </div>
+{/* 
         <div className={S.BoardBoxSlide}>
           <div className={S.BoardBoxNumbers}>
             <div className={S.BoardBoxSelectNumbers}>1</div>
@@ -126,10 +146,10 @@ const Board = () => {
                 alt="ArrowIcon"
                 width={10}
                 height={16}
-              ></Image>
+              />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
