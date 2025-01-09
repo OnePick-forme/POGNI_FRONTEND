@@ -6,6 +6,7 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import axios from "axios";
 import BoardUpload from "@/app/admin/components/boardUpload";
+import { useSearchParams } from "next/navigation";
 
 const CustomToolbar = () => (
   <div id="toolbar">
@@ -21,6 +22,9 @@ const CustomToolbar = () => (
 const Write = () => {
   const [value, setValue] = useState(""); // 게시글 내용
   const [title, setTitle] = useState(""); // 게시글 제목
+  const searchParams = useSearchParams(); // ✅ Move hook inside component body
+  const index = searchParams.get("index");
+  console.log(index);
 
   const handleSubmit = async () => {
     if (!title || !value) {
@@ -28,10 +32,13 @@ const Write = () => {
       return;
     }
 
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", value); // HTML 내용 포함
-    formData.append("date", new Date().toISOString().split("T")[0]); // yyyy-mm-dd 형식
+    formData.append("date", new Date().toISOString().split("T")[0]);
+    formData.append("file", "");
+    formData.append("hashtagIds", index ?? "");
 
     try {
       const response = await axios.post(

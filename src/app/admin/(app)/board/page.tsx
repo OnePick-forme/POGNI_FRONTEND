@@ -1,7 +1,6 @@
 "use client";
 
 import * as S from "./style.css";
-import Link from "next/link";
 import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
@@ -32,6 +31,7 @@ const Board = () => {
   }]);
 
   const searchParams = useSearchParams();
+  const index = searchParams.get('index');
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString); // 문자열을 Date 객체로 변환
     const year = date.getFullYear(); // 연도
@@ -54,7 +54,7 @@ const Board = () => {
             }
           );
           setCategoryData(response.data); // CategoryData 업데이트
-          setPosts(response.data.posts || []); // 게시물 데이터를 받아와서 업데이트
+          // setPosts(response.data.posts || []); // 게시물 데이터를 받아와서 업데이트
         }
       } catch (err) {
         console.error("데이터 불러오기 실패:", err);
@@ -77,7 +77,7 @@ const Board = () => {
         console.error("데이터 불러오기 실패:", err);
       }
     };
-    const index = searchParams.get('index');
+
     fetchBoardData();
     fetchData();
   }, []);
@@ -96,9 +96,9 @@ const Board = () => {
           <p className={S.Title}>{CategoryData.name}</p>
           <div>수정</div>
           <div>삭제</div>
-          <Link href="/admin/write" className={S.WriteButton}>
+          <div className={S.WriteButton} onClick={()=>{window.location.href = `/admin/write?index=${index}`;}}>
             글작성
-          </Link>
+          </div>
         </div>
 
         <div className={S.BoardTitleBottom}>
