@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+  import { style } from "@vanilla-extract/css";
 import theme from "@/ui/style/theme.css";
 
 export const WriteLayout = style({

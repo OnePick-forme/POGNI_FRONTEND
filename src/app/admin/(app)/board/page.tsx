@@ -1,7 +1,6 @@
 "use client";
 
 import * as S from "./style.css";
-import Link from "next/link";
 import Footer from "@/app/admin/components/footer";
 import Image from "next/image";
 import BoardBox from "@/app/(user)/components/boardBox";
@@ -9,29 +8,40 @@ import Header from "@/app/admin/components/header";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-// Post 타입 정의
-interface Post {
-  id: string; // 게시글 ID 추가
-  imageUrl?: string;
-  title: string;
-  date: string;
-}
+import { useRouter } from "next/router";
 
 const Board = () => {
   const [CategoryData, setCategoryData] = useState({
     name: "",
     content: "",
   });
-  const [posts, setPosts] = useState<Post[]>([]);
+
+  const [BoardData, setBoardData] = useState([
+    {
+      id: 0,
+      title: "",
+      content: "",
+      date: "",
+      img: "",
+    },
+  ]);
 
   const searchParams = useSearchParams();
+  const index = searchParams.get("index");
+  const router = useRouter(); // useRouter 훅을 사용하여 페이지 이동
+
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString); // 문자열을 Date 객체로 변환
+    const year = date.getFullYear(); // 연도
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // 월 (0부터 시작하므로 +1)
+    const day = String(date.getDate()).padStart(2, "0"); // 일
+
+    return `${year}.${month}.${day}`; // 원하는 형식으로 반환
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const index = searchParams.get("index");
-        console.log("index:", index); // index 값 확인
         if (index) {
           const response = await axios.get(
             `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}`,
@@ -41,11 +51,7 @@ const Board = () => {
               },
             }
           );
-          console.log("response.data:", response.data); // 서버 응답 데이터 확인
-          setCategoryData(response.data);
-          setPosts(response.data.posts || []);
-        } else {
-          console.warn("index 값이 없습니다.");
+          setCategoryData(response.data); // CategoryData 업데이트
         }
       } catch (err) {
         console.error("데이터 불러오기 실패:", err);
@@ -53,27 +59,52 @@ const Board = () => {
       }
     };
 
-    fetchData();
-  }, [searchParams]);
+    const fetchBoardData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/hashtag/${index}/posts`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setBoardData(response.data);
+        console.log("불러온 데이터:", response.data);
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+      }
+    };
 
-  const { name: TitleName } = CategoryData;
+    fetchBoardData();
+    fetchData();
+  }, [index]);
+
+  const handleBoardBoxClick = (id: number) => {
+    router.push(`/detail/${id}?index=${CategoryData.name.toLowerCase()}`);
+  };
 
   return (
     <>
       <Header />
       <div className={S.BoardLayout}>
         <div className={S.BoardTitle}>
-          <p className={S.Title}>{TitleName}</p>
+          <p className={S.Title}>{CategoryData.name}</p>
           <div>수정</div>
           <div>삭제</div>
-          <Link href="/admin/write" className={S.WriteButton}>
+          <div
+            className={S.WriteButton}
+            onClick={() => {
+              window.location.href = `/admin/write?index=${index}`;
+            }}
+          >
             글작성
-          </Link>
+          </div>
         </div>
 
         <div className={S.BoardTitleBottom}>
           <div className={S.BoardTitleText}>
-            전체 <div className={S.BoardTitleNumber}>{posts.length}</div>건
+            전체 <div className={S.BoardTitleNumber}>{BoardData.length}</div>건
           </div>
           <div className={S.BoardSearchBox}>
             <input
@@ -87,22 +118,19 @@ const Board = () => {
         </div>
 
         <div className={S.BoardBoxList}>
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/detail/${post.id}`} // 상세페이지 경로
-              >
-                <BoardBox
-                  ImageUrl={post.imageUrl || "/Search.svg"}
-                  Date={post.date || "2024.12.13"}
-                  Title={post.title || "기본 제목"}
-                />
-              </Link>
-            ))
-          ) : (
-            <p>현재 게시글이 없습니다.</p>
-          )}
+          {BoardData.map((data, index) => (
+            <div
+              key={index}
+              className={S.BoardBoxContainer}
+              onClick={() => handleBoardBoxClick(data.id)} // 클릭 이벤트 핸들러
+            >
+              <BoardBox
+                ImageUrl={data.img || "/gray.png"} // img가 없으면 기본 이미지 사용
+                Date={formatDate(data.date)}
+                Title={data.title}
+              />
+            </div>
+          ))}
         </div>
       </div>
       <Footer />

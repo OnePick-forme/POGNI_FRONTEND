@@ -4,9 +4,9 @@ import theme from "@/ui/style/theme.css";
 export const BoardLayout = style({
   width: "100%",
   padding: "0 10%",
-  minHeight:"100vh",
-  display:"flex",
-  flexDirection:"column"
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
 });
 
 export const BoardTitle = style({
@@ -119,3 +119,5 @@ export const BoardBoxSlideButton = style({
 export const BoardBoxSelectNumbers = style({
   color: theme.green,
 });
+
+export const BoardBoxContainer = style({});
