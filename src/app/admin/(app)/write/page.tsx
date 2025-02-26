@@ -2,11 +2,20 @@
 import Header from "@/app/admin/components/header";
 import * as S from "./style.css";
 import React, { useState } from "react";
-import ReactQuill from "react-quill-new";
+import ReactQuill, { Quill } from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import axios from "axios";
 import BoardUpload from "@/app/admin/components/boardUpload";
 import { useSearchParams } from "next/navigation";
+
+// ✅ 커스텀 아이콘 설정
+const icons = Quill.import("ui/icons") as Record<string, string>;
+icons["bold"] = "<span style='font-weight: bold;'>두껍게</span>";
+icons["italic"] = "<span style='font-style: italic;'>기울기</span>";
+icons["underline"] = "<span style='text-decoration: underline;'>밑줄긋기</span>";
+icons["strike"] = "<span style='text-decoration: line-through;'>취소선</span>";
+icons["link"] = "링크첨부 🔗";
+icons["image"] = "사진첨부 🖼️";
 
 const CustomToolbar = () => (
   <div id="toolbar">
@@ -22,7 +31,7 @@ const CustomToolbar = () => (
 const Write = () => {
   const [value, setValue] = useState(""); // 게시글 내용
   const [title, setTitle] = useState(""); // 게시글 제목
-  const searchParams = useSearchParams(); // ✅ Move hook inside component body
+  const searchParams = useSearchParams();
   const index = searchParams.get("index");
   console.log(index);
 
@@ -32,13 +41,17 @@ const Write = () => {
       return;
     }
 
-
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("content", value); // HTML 내용 포함
+    formData.append("content", value);
     formData.append("date", new Date().toISOString().split("T")[0]);
     formData.append("file", "");
     formData.append("hashtagIds", index ?? "");
+
+    console.log("서버로 보낼 데이터:");
+    for (const [key, val] of formData.entries()) {
+      console.log(`${key}: ${val}`);
+    }
 
     try {
       const response = await axios.post(

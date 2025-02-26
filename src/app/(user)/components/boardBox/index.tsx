@@ -1,5 +1,4 @@
 import * as S from "./style.css";
-import Link from "next/link";
 import Image from "next/image";
 
 const BoardBox = ({ImageUrl,Title,Date}:{ImageUrl:string,Title:string,Date:string}) => {  
