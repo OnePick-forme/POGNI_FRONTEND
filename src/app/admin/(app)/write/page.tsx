@@ -108,6 +108,7 @@ const Write = () => {
           className={S.WriteEditer}
           modules={modules}
           formats={formats}
+          placeholder="내용을 입력해보세요!"
         />
       </div>
       <BoardUpload onClick={handleSubmit} />

@@ -24,45 +24,32 @@ export const WriteTitle = style({
 export const CustomToolbar = style({
   display: "flex",
   border: "none",
-  padding: "10px 0",
 });
 
 export const CustomToolbarButton = style({
   fontSize: "14px",
-  padding: "5px 10px",
+  padding: "0px 10px 0 0",
   border: "none",
-  borderRadius: "4px",
-  writingMode: "horizontal-tb",
+  marginTop: "8px",
 });
 
 export const WriteLine = style({
   display: "flex",
-  width: "18%",
-  padding: "2px",
+  width: "35%",
+  padding: "1.5px",
   marginBottom: "5px",
   backgroundColor: theme.gray[300],
 });
 
 export const WriteEditer = style({
-  marginTop: "16px",
+  marginTop: "12px",
+  padding: "0",
 });
 
 export const Line = style({
+  marginTop: "20px",
   display: "flex",
   width: "100%",
   padding: "1px",
   backgroundColor: theme.gray[200],
-});
-
-export const Toolbar = style({
-  display: "flex",
-  border: "none",
-  padding: "10px 0 0 0 ",
-});
-
-export const ToolbarButton = style({
-  display: "flex",
-  fontSize: "20px",
-  border: "none",
-  borderRadius: "4px",
 });
