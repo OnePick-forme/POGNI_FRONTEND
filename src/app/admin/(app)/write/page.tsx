@@ -8,29 +8,29 @@ import axios from "axios";
 import BoardUpload from "@/app/admin/components/boardUpload";
 import { useSearchParams } from "next/navigation";
 
-// ✅ 커스텀 아이콘 설정
 const icons = Quill.import("ui/icons") as Record<string, string>;
 icons["bold"] = "<span style='font-weight: bold;'>두껍게</span>";
 icons["italic"] = "<span style='font-style: italic;'>기울기</span>";
-icons["underline"] = "<span style='text-decoration: underline;'>밑줄긋기</span>";
+icons["underline"] =
+  "<span style='text-decoration: underline;'>밑줄긋기</span>";
 icons["strike"] = "<span style='text-decoration: line-through;'>취소선</span>";
-icons["link"] = "링크첨부 🔗";
-icons["image"] = "사진첨부 🖼️";
+icons["link"] = "링크 첨부";
+icons["image"] = "사진 첨부";
 
 const CustomToolbar = () => (
   <div id="toolbar">
-    <button className="ql-bold" title="굵게"></button>
-    <button className="ql-italic" title="기울임"></button>
-    <button className="ql-underline" title="밑줄"></button>
-    <button className="ql-strike" title="취소선"></button>
-    <button className="ql-link" title="링크"></button>
-    <button className="ql-image" title="이미지"></button>
+    <button className={`ql-bold ${S.CustomToolbarButton}`}>굵게</button>
+    <button className={`ql-italic ${S.CustomToolbarButton}`}>기울임</button>
+    <button className={`ql-underline ${S.CustomToolbarButton}`}>밑줄</button>
+    <button className={`ql-strike ${S.CustomToolbarButton}`}>취소선</button>
+    <button className={`ql-link ${S.CustomToolbarButton}`}>링크</button>
+    <button className={`ql-image ${S.CustomToolbarButton}`}>이미지</button>
   </div>
 );
 
 const Write = () => {
-  const [value, setValue] = useState(""); // 게시글 내용
-  const [title, setTitle] = useState(""); // 게시글 제목
+  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
   const searchParams = useSearchParams();
   const index = searchParams.get("index");
   console.log(index);

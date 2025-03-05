@@ -1,13 +1,13 @@
-  import { style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import theme from "@/ui/style/theme.css";
 
 export const WriteLayout = style({
   height: "100vh",
   width: "100%",
   padding: "0 10%",
-  minHeight:"100vh",
-  display:"flex",
-  flexDirection:"column"
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
 });
 
 export const WriteTitle = style({
@@ -19,6 +19,20 @@ export const WriteTitle = style({
   marginTop: "56px",
   zIndex: "20",
   width: "100%",
+});
+
+export const CustomToolbar = style({
+  display: "flex",
+  border: "none",
+  padding: "10px 0",
+});
+
+export const CustomToolbarButton = style({
+  fontSize: "14px",
+  padding: "5px 10px",
+  border: "none",
+  borderRadius: "4px",
+  writingMode: "horizontal-tb",
 });
 
 export const WriteLine = style({
