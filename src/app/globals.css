@@ -71,6 +71,11 @@ a {
   padding: 0;
 }
 
+.ql-snow .ql-toolbar button, 
+.ql-snow.ql-toolbar button {
+    width: auto !important;
+}
+
 .ql-toolbar button {
   font-size: 24px; /* 텍스트 크기 */
   font-family: Pretendard !important; 
